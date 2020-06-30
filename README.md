@@ -10,9 +10,6 @@ Secured Digi Locker is an advanced application in which the file storing makes i
 
 The main advantage of this system is that it asks for Secure Pin to access the file which we enter while registering ourselves. Secure pin ensures that if our phone is in someone&#39;s hand they won&#39;t be able to access the files. The files are secured in many ways which no intruder can access them in any case. We make uses of SQLite as it&#39;s backend to support the application.
 
-**Literature Review**
-
-We conducted a study on the topic Digital Empowerment of Rural People-Issues and Challenges. It discusses about the various plans and strategies which were adopted by the government for empowering the rural people for making them digitally literate. It mainly focuses on digital empowering of citizens. The empowerment of citizens can be done through various methods like digital India through which people can be made digitally literate and empowered. The study concludes that digital empowerment of citizen&#39;s act as a catalyst for the economic development of a country with minimum paper transactions.
 
 | **Pros** 1. The Cost of Providing the Service2. Quick turnaround time3. Reduce Frauds4. e-Sign5. Comparison with Private Cloud Storage Services6. Anytime Anywhere Access
  | **Cons** 1. This system won&#39;t work in mobile phone that does not support android.2. It is device dependent.3. If phone gets formatted, data will be lost as we store data in Phone memory.4. System will provide inaccurate results if data not entered correctly. |
