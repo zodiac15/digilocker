@@ -11,9 +11,13 @@ Secured Digi Locker is an advanced application in which the file storing makes i
 The main advantage of this system is that it asks for Secure Pin to access the file which we enter while registering ourselves. Secure pin ensures that if our phone is in someone&#39;s hand they won&#39;t be able to access the files. The files are secured in many ways which no intruder can access them in any case. We make uses of SQLite as it&#39;s backend to support the application.
 
 
-| **Pros** 1. The Cost of Providing the Service2. Quick turnaround time3. Reduce Frauds4. e-Sign5. Comparison with Private Cloud Storage Services6. Anytime Anywhere Access
- | **Cons** 1. This system won&#39;t work in mobile phone that does not support android.2. It is device dependent.3. If phone gets formatted, data will be lost as we store data in Phone memory.4. System will provide inaccurate results if data not entered correctly. |
-| --- | --- |
+**Pros** 
+1. The Cost of Providing the Service
+2. Quick turnaround time
+3. Reduce Frauds
+4. e-Sign
+5. Comparison with Private Cloud Storage Services
+6. Anytime Anywhere Access
 
 **Problem formulation/Objectives:**
 
