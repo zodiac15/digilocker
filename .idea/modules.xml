@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/digilocker.iml" filepath="$PROJECT_DIR$/.idea/digilocker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/digi_locker.iml" filepath="$PROJECT_DIR$/.idea/digi_locker.iml" />
     </modules>
   </component>
 </project>
