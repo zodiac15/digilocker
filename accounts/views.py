@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-
+from .forms import CustomUserCreationForm
 
 # Create your views here.
 @login_required
@@ -13,7 +13,7 @@ def index(request):
 
 def sign_up(request):
     context = {}
-    form = UserCreationForm(request.POST or None)
+    form = CustomUserCreationForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             user = form.save()

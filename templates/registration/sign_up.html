@@ -1,5 +1,18 @@
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Sign up">
-</form>
+{% extends 'base.html' %}
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="row center">
+            <button type="submit"
+                    class="btn-large waves-effect waves-light orange">Signup
+            </button>
+        </div>
+    </form>
+    <p><strong>-- OR --</strong></p>
+    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+{% endblock %}

@@ -1,5 +1,21 @@
-<form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Login">
-</form>
+{% extends 'base.html' %}
+{% block title %}
+    login
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="row center">
+            <button type="submit"
+                    class="btn-large waves-effect waves-light orange">Login
+            </button>
+        </div>
+    </form>
+    <br>
+    <p><strong>-- OR --</strong></p>
+    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+{% endblock %}
