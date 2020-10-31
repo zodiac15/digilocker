@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
+
 {% block title %}
     Register
 {% endblock %}
@@ -6,7 +8,44 @@
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+
+            {% if field.errors %}
+                <div class="input-field col s12">
+                    {{ field.label_tag }}
+
+                    {% render_field field class="validate" %}
+                    {% for error in field.errors %}
+                        <p style="font-size: smaller;color: red">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+            {% else %}
+
+                <div class="input-field col s12">
+                    {{ field.label_tag }}
+
+                    {% render_field field class="validate" %}
+                    {% if field.help_text %}
+                        <span class="helper-text" data-error="{{ error }}"
+                              data-success="right">{{ field.help_text }}</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+        {% if form.non_field_errors %}
+
+            {% for error in form.non_field_errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+
+        {% endif %}
         <div class="row center">
             <button type="submit"
                     class="btn-large waves-effect waves-light orange">Signup
@@ -15,4 +54,5 @@
     </form>
     <p><strong>-- OR --</strong></p>
     <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
 {% endblock %}
