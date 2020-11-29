@@ -1,138 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Welcome {{ user|capfirst }}</title>
+{% extends 'base.html' %}
+{% block title %}
+    Welcome {{ user|capfirst }}
+{% endblock %}
 
-    <!-- CSS  -->
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-</head>
-<body>
-<div class="navbar-fixed">
-    <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+{% block content %}
+    <div class="row">
+        <div class="col m3 " style="text-align: center">
+            <br><br>
+            <i class="large material-icons" style="color: gray;font-size: 150px">account_circle</i>
+            <h2>{{ user|capfirst }}</h2>
+            <br>
+            <div class="row center">
+                <a href="{% url 'logout' %}?next={% url 'home' %}" id="download-button"
+                   class="btn-large waves-effect waves-light cyan accent-4">Logout</a>
+            </div>
+            <br><br><br><br><br>
         </div>
-    </nav>
-</div>
-<div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-        <br><br>
-        <h1 class="header center orange-text">{{ user|capfirst }}</h1>
-        <div class="row center">
-            <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-        <div class="row center">
-            <a href="{% url 'logout' %}?next={% url 'home' %}" id="download-button"
-               class="btn-large waves-effect waves-light orange">Logout</a>
-        </div>
-        <br><br>
+        <div class="col m9">
+            <div class="container">
+                <div class="section">
+                    <br><br>
+                    <div class="row" style="text-align: center">
+                        <div class="container">
+                            <form method="post" enctype="multipart/form-data" class="">
+                                {% csrf_token %}
 
-    </div>
-</div>
+                                <div class="file-field input-field">
+                                    <div class="btn  cyan accent-4">
+                                        <span>File</span>
+                                        <input type="file" name="upfile">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" name="file-name" type="text"
+                                               placeholder="Upload your file">
+                                    </div>
+                                </div>
+                                <div class="input-field">
+                                    <input id="password" type="password" name="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="row center">
+                                    <button type="submit" name="upload" value="1"
+                                            class="btn waves-effect waves-light cyan accent-4">Upload
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        {% if uploaded %}
+                            <p>File Upload successful</p>
+                        {% endif %}
+                    </div>
 
 
-<div class="container">
-    <div class="section">
+                    <h3 style="text-align: center">Your Files</h3>
+                    <br><br>
+                    <div class="row">
+                        {% for file in blocks %}
+                            <div class="col s6 m4">
+                                <div class="card" style="text-align: center;">
+                                    <div class="card-content">
+                                        <i class="{{ file.file_icon }}" style="color:{{ file.file_icon_color }}"
+                                           aria-hidden="true"></i>
+                                        <span class="card-title" style="font-size: 20px">{{ file.name }}</span>
+                                    </div>
+                                    <div class="card-action">
+                                        <button class="btn activator responsive waves-effect waves-light cyan accent-4"
+                                                name="submit">
+                                            Download
+                                        </button>
+                                    </div>
+                                    <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">Password<i
+                                            class="material-icons right">close</i></span>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <div class="input-field">
+                                                <input id="dpassword" type="password" name="password" class="validate">
+                                                <label for="dpassword">Password</label>
+                                            </div>
+                                            <input type="hidden"  name="index" value="{{ file.index }}">
+                                            <div class="row center">
+                                                <button type="submit" name="download" value="1"
+                                                        class="btn waves-effect waves-light cyan accent-4">Download
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
 
-        <!--   Icon Section   -->
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
-                    <h5 class="center">Speeds up development</h5>
-
-                    <p class="light">We did most of the heavy lifting for you to provide a default stylings that
-                        incorporate our custom components. Additionally, we refined animations and transitions to
-                        provide a smoother experience for developers.</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
-                    <h5 class="center">User Experience Focused</h5>
-
-                    <p class="light">By utilizing elements and principles of Material Design, we were able to create a
-                        framework that incorporates components and animations that provide more feedback to users.
-                        Additionally, a single underlying responsive system across all platforms allow for a more
-                        unified user experience.</p>
-                </div>
-            </div>
-
-            <div class="col s12 m4">
-                <div class="icon-block">
-                    <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
-                    <h5 class="center">Easy to work with</h5>
-
-                    <p class="light">We have provided detailed documentation as well as specific code examples to help
-                        new users get started. We are also always open to feedback and can answer any questions a user
-                        may have about Materialize.</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <br><br>
-</div>
-
-<footer class="page-footer orange">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
-                    our full time job. Any amount would help support and continue development on this project and is
-                    greatly appreciated.</p>
-
-
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Settings</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-            <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
-                <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
-                </ul>
+                <br><br>
             </div>
         </div>
     </div>
-    <div class="footer-copyright">
-        <div class="container">
-            Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-        </div>
-    </div>
-</footer>
 
-
-<!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="application/javascript">M.AutoInit()</script>
-
-</body>
-</html>
+{% endblock %}

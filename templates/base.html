@@ -1,15 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     <title>{% block title %}{% endblock %}</title>
-
+    <link href="{% static 'home/shield.png' %}" rel="icon" sizes="32x32">
     <!-- CSS  -->
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -17,46 +20,38 @@
 </head>
 <body>
 <div class="navbar-fixed">
-    <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="{% url 'index' %}"
+               class="brand-logo black-text" style="font-weight: 600"><img src="{% static 'home/shield.png' %}"
+                                                                           height="30px"> Digilocker</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Navbar Link</a></li>
+                <li><a class="black-text" href="{% url 'index' %}">Home</a></li>
+                <li><a class="black-text" href="{% url 'home' %}">Account</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a class="black-text" href="{% url 'login' %}">Login</a></li>
+                    <li><a class="black-text" href="{% url 'sign-up' %}">Register</a></li>
+                {% endif %}
             </ul>
 
-            <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">Navbar Link</a></li>
+            <ul class="sidenav" id="mobile-demo">
+                <li><a class="black-text" href="{% url 'index' %}">Home</a></li>
+                <li><a class="black-text" href="{% url 'home' %}">Account</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a class="black-text" href="{% url 'login' %}">Login</a></li>
+                    <li><a class="black-text" href="{% url 'sign-up' %}">Register</a></li>
+                {% endif %}
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
 </div>
-<div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-        <br><br>
 
-        <br><br>
+{% block content %}
+{% endblock %}
 
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div>
-            <div class="card white z-depth-1" style="text-align: center">
-                <div class="container">
-                    <br><br>
-                    {% block content %}
-                    {% endblock %}
-                    <br><br>
-                </div>
-            </div>
-        </div>
-        <br><br>
-    </div>
-</div>
-
-
-<footer class="page-footer orange">
+<footer class="page-footer grey darken-4">
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
@@ -78,12 +73,14 @@
                 </ul>
             </div>
             <div class="col l3 s12">
-                <h5 class="white-text">Connect</h5>
+                <h5 class="white-text">Links</h5>
                 <ul>
-                    <li><a class="white-text" href="#!">Link 1</a></li>
-                    <li><a class="white-text" href="#!">Link 2</a></li>
-                    <li><a class="white-text" href="#!">Link 3</a></li>
-                    <li><a class="white-text" href="#!">Link 4</a></li>
+                    <li><a class="white-text" href="{% url 'index' %}">Home</a></li>
+                    <li><a class="white-text" href="{% url 'home' %}">Account</a></li>
+                    {% if not user.is_authenticated %}
+                        <li><a class="white-text" href="{% url 'login' %}">Login</a></li>
+                        <li><a class="white-text" href="{% url 'sign-up' %}">Register</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -98,8 +95,12 @@
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script >
-     M.AutoInit();
+<script>
+    M.AutoInit();
+
+    $(document).ready(function () {
+        $('.sidenav').sidenav();
+    });
 </script>
 
 </body>

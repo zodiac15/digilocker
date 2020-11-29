@@ -2,62 +2,89 @@
 {% load widget_tweaks %}
 
 {% block title %}
-    login
+    Login
 {% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-        {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div>
+
+                <div class="container" style="text-align: center">
+                    <br><br>
+
+
+                    <i class="large material-icons" style="color: gray;font-size: 150px">account_circle</i>
+                    <br>
+                    <h2>Login</h2>
+                    <br>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field }}
+                        {% endfor %}
 
 
 
-        {% for field in form.visible_fields %}
+                        {% for field in form.visible_fields %}
 
-            {% if field.errors %}
-                <div class="input-field col s12">
-                    {{ field.label_tag }}
+                            {% if field.errors %}
+                                <div class="input-field col s12">
+                                    {{ field.label_tag }}
 
-                    {% render_field field class="validate" %}
-                    {% for error in field.errors %}
-                        <p style="font-size: smaller;color: red">{{ error }}</p>
-                    {% endfor %}
+                                    {% render_field field class="validate" %}
+                                    {% for error in field.errors %}
+                                        <p style="font-size: smaller;color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+
+                            {% else %}
+
+                                <div class="input-field col s12">
+                                    {{ field.label_tag }}
+
+                                    {% render_field field class="validate" %}
+                                    {% if field.help_text %}
+                                        <span class="helper-text" data-error="{{ error }}"
+                                              data-success="right">{{ field.help_text }}</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                        {% endfor %}
+
+                        {% if form.non_field_errors %}
+
+                            {% for error in form.non_field_errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+
+                        {% endif %}
+
+                        <div class="row center">
+                            <button class="btn waves-effect waves-light cyan accent-4" name="submit" type="submit">
+                                Submit
+                                <i
+                                        class="material-icons right">send</i></button>
+                            <a class="waves-effect waves-light btn cyan accent-4" href="{% url 'sign-up' %}"><i
+                                    class="material-icons right">account_circle</i>Register</a>
+                            {#            <button type="submit"#}
+                            {#                    class="btn-large waves-effect waves-light orange">Login#}
+                            {#            </button>#}
+                        </div>
+                    </form>
+                    <br>
+                    <p><strong>-- OR Login Using--</strong></p>
+                    <a href="{% url 'social:begin' 'github' %}"><i class="fa fa-github fa-3x black-text"
+                                                                   aria-hidden="true"></i></a>
+                    {#    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>#}
+                    <a href="{% url 'social:begin' 'google-oauth2' %}"><i class="fa fa-google fa-3x black-text"
+                                                                          aria-hidden="true"></i></a>
+                    <br><br>
                 </div>
 
-            {% else %}
-
-                <div class="input-field col s12">
-                    {{ field.label_tag }}
-
-                    {% render_field field class="validate" %}
-                    {% if field.help_text %}
-                        <span class="helper-text" data-error="{{ error }}"
-                              data-success="right">{{ field.help_text }}</span>
-                    {% endif %}
-                </div>
-            {% endif %}
-
-        {% endfor %}
-
-        {% if form.non_field_errors %}
-
-            {% for error in form.non_field_errors %}
-                <p style="color: red">{{ error }}</p>
-            {% endfor %}
-
-        {% endif %}
-
-        <div class="row center">
-            <button type="submit"
-                    class="btn-large waves-effect waves-light orange">Login
-            </button>
+            </div>
+            <br><br>
         </div>
-    </form>
-    <br>
-    <p><strong>-- OR --</strong></p>
-    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
-    {#    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>#}
-    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+    </div>
 {% endblock %}
