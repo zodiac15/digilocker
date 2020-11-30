@@ -48,14 +48,4 @@ def decrypt(enc_dict, password):
     return decrypted
 
 
-def main():
-    password = input("Password: ")
-
-    # First let us encrypt secret message
-    encrypted = encrypt("The secretest message here", password)
-    print(encrypted)
-
-    # Let us decrypt using our original password
-    decrypted = decrypt(encrypted, password)
-    print(bytes.decode(decrypted))
 
