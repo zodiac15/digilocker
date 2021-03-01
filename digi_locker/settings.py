@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'digi_locker.urls'
@@ -132,6 +134,7 @@ LOGOUT_URL = 'logout'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # social tokens
 
@@ -143,3 +146,6 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '35558ca026ee41c4e4dc10b7562d0b2f'  # App Secret
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '679365659838-muhdjokkqk0tlir3b5ctf74bncef9r19.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Xw53suZycS0CdERxYhlDaOVD'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

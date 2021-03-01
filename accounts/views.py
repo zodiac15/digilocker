@@ -75,7 +75,7 @@ def index(request):
                 'type': "create"
                 }
 
-        response = requests.post('http://127.0.0.1:5000/api/addblock', data=data).json()
+        response = requests.post('https://digilocker-blockchain.herokuapp.com/api/addblock', data=data).json()
         if 'status' in response and response['status']:
             print(response)
             mb = UserBlock(index=response['index'], user=request.user.username)
@@ -89,7 +89,7 @@ def index(request):
     if request.method == 'POST' and 'download' in request.POST:
         indx = request.POST['index']
         password = hashlib.sha1(request.POST['password'].encode('utf-8')).hexdigest()
-        response = requests.post('http://127.0.0.1:5000/api/fetch', data={'index': indx}).json()
+        response = requests.post('https://digilocker-blockchain.herokuapp.com/api/fetch', data={'index': indx}).json()
         name = response['data']['name']
         f_type = response['data']['file_type']
         nonce = response['data']['nonce']
@@ -110,7 +110,7 @@ def index(request):
     list_of_index = list(UserBlock.objects.values_list('index', flat=True).filter(user=request.user.username))
     blocks = []
     for i in list_of_index:
-        response = requests.post('http://127.0.0.1:5000/api/fetch', data={'index': i}).json()
+        response = requests.post('https://digilocker-blockchain.herokuapp.com/api/fetch', data={'index': i}).json()
         name = response['data']['name']
         file_type = response['data']['file_type']
         if file_type in file_type_dict:
