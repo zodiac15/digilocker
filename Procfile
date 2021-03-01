@@ -1,1 +1,1 @@
-web: gunicorn digilocker.wsgi
+web: gunicorn digi_locker.wsgi
