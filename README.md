@@ -49,5 +49,5 @@ Objectives of such digital repository solution are:
   - Memory – 2GB
   - Internet Connection
 
-**Note**
+**Note:**
 This project requires the setup of the main blockchain server which can be found at https://github.com/zodiac15/flask-blockchain-master
