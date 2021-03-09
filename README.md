@@ -49,10 +49,5 @@ Objectives of such digital repository solution are:
   - Memory – 2GB
   - Internet Connection
 
-**Bibliography/References:**
-
-1. https://www.djangoproject.com/
-2. https://digilocker.gov.in/assets/img/technical-specifications-dlts-ver-2.3.pdf
-3. https://ieeexplore.ieee.org/document/7566416
-4. Liu, Kun &amp; Dong, Long-jiang. (2012). Research on Cloud Data Storage Technology and Its Architecture Implementation. Procedia Engineering. 29. 133–137. 10.1016/j.proeng.2011.12.682.
-5. Kamara S., Lauter K. (2010) Cryptographic Cloud Storage. In: Sion R. et al. (eds) Financial Cryptography and Data Security. FC 2010. Lecture Notes in Computer Science, vol 6054. Springer, Berlin, Heidelberg
+**Note**
+This project requires the setup of the main blockchain server which can be found at https://github.com/zodiac15/flask-blockchain-master
